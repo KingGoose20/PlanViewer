@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout Plans</title>
+  <style>
+    /* Add styling */
+    body {
+      font-family: Arial, sans-serif;
+      
+    }
+    .plan, .week, .workout, .exercise {
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+    .plan {
+      background-color: #f9f9f9;
+    }
+    .workout {
+      background-color: #f0f0f0;
+    }
+    .exercise {
+      background-color: #fff;
+    }
+    button {
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Workout Plans</h1>
+
+  <!-- Section to add new plans -->
+  <div>
+    <h2>Add New Plan</h2>
+    <input type="text" id="planName" placeholder="Plan Name">
+    <button onclick="addPlan()">Add Plan</button>
+  </div>
+
+  <!-- Buttons to export data -->
+  <div>
+    <h2>Export Data</h2>
+    <button onclick="exportPlans()">Export as JSON File</button>
+    <button onclick="exportPlansAsJS()">Copy as JavaScript Code</button>
+  </div>
+
+  <!-- Plans container -->
+  <div id="plansContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

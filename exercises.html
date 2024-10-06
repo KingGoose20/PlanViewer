@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercises</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+
+        }
+
+        .exercise {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <h3 class="banner" style="text-align: center;">Plan Viewer</h3>
+    <div class="main">
+        <script>
+            function openWebPage() {
+                // Get the current URL parameters
+                const params = new URLSearchParams(window.location.search);
+
+                // Construct the new URL with the parameters
+                const newUrl = 'workouts.html?' + params.toString(); // Change this to your target URL
+
+                // Open the new URL in a new tab
+                window.open(newUrl, '_self');
+            }
+        </script>
+        <button onclick="openWebPage()">Back</button>
+        <h1>Exercises in Plan <u><span id="pname"></span></u> and <u><span id="wname"></span></u> and <u><span
+                    id="woname"></span></u></h1>
+        <div id="exercisesContainer"></div>
+        <div class="table-container">
+            <table id="exercisesTable" style="width: 100%; text-align: left; border: 2px solid black;">
+                <thead>
+                    <tr style="border: 1px solid black;">
+                        <th>Exercise Name</th>
+                        <th>Sets</th>
+                        <th>Reps</th>
+                        <th>Distance</th>
+                        <th>Rest Time</th>
+                        <th>YouTube Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Exercise rows will be appended here -->
+                </tbody>
+            </table>
+        </div>
+
+        <script src="script.js"></script> <!-- Include your plans data -->
+        <script>
+            // Retrieve the plan, week, and workout index from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const planIndex = urlParams.get('planIndex');
+            const weekIndex = urlParams.get('weekIndex');
+            const workoutIndex = urlParams.get('workoutIndex');
+
+            function renderExercises() {
+                const exercisesContainer = document.getElementById('exercisesContainer');
+                exercisesContainer.innerHTML = ''; // Clear the container
+
+                const exercises = plans[planIndex].weeks[weekIndex].workouts[workoutIndex].exercises; // Get exercises from the selected workout
+
+                document.getElementById("pname").innerHTML = plans[planIndex].name
+                document.getElementById("wname").innerHTML = plans[planIndex].weeks[weekIndex].name
+                document.getElementById("woname").innerHTML = plans[planIndex].weeks[weekIndex].workouts[workoutIndex].name
+
+                exercises.forEach(exercise => {
+                    // Create a table row for the exercise
+                    const exerciseRow = document.createElement('tr');
+
+                    // Create a cell for the exercise name
+                    const exerciseNameCell = document.createElement('td');
+                    exerciseNameCell.innerHTML = exercise.name;
+                    exerciseRow.appendChild(exerciseNameCell);
+
+                    // Create a cell for the sets
+                    const setsCell = document.createElement('td');
+                    setsCell.innerHTML = exercise.sets;
+                    exerciseRow.appendChild(setsCell);
+
+                    // Create a cell for the reps
+                    const repsCell = document.createElement('td');
+                    repsCell.innerHTML = exercise.reps;
+                    exerciseRow.appendChild(repsCell);
+
+                    // Create a cell for the distance
+                    const distanceCell = document.createElement('td');
+                    distanceCell.innerHTML = exercise.distance;
+                    exerciseRow.appendChild(distanceCell);
+
+                    // Create a cell for the rest time
+                    const restTimeCell = document.createElement('td');
+                    restTimeCell.innerHTML = exercise.restTime;
+                    exerciseRow.appendChild(restTimeCell);
+
+                    // Create a cell for the YouTube link
+                    const youtubeCell = document.createElement('td');
+                    const youtubeLink = document.createElement('a');
+                    youtubeLink.href = exercise.youtubeLink;
+                    youtubeLink.target = "_blank"; // Open in new tab
+                    youtubeLink.innerText = "Video";
+                    youtubeCell.appendChild(youtubeLink);
+                    exerciseRow.appendChild(youtubeCell);
+
+                    // Append the row to the exercises table
+                    const exercisesTable = document.getElementById('exercisesTable'); // Ensure you have a table with this ID in your HTML
+                    exercisesTable.appendChild(exerciseRow);
+
+                });
+            }
+
+            // Call renderExercises to load data
+            renderExercises();
+        </script>
+    </div>
+</body>
+
+</html>
