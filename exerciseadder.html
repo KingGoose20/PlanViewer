@@ -1,0 +1,29 @@
+<p>Name</p><input type="text" placeholder="Exercise Name" id="name">
+<p>Level Number</p><input type="text" placeholder="Level Name" id="lname">
+<p>Level Link</p><input type="text" placeholder="Level Link" id="llink">
+<button onclick="addLevel()">Add Level</button>
+<br><br><br>
+<button onclick="runMain()">Run</button>
+<br><br><br>
+<p id="text"></p>
+<script>
+    levels = []
+    links = []
+    function runMain() {
+        Name = document.getElementById("name")
+        startText = '{ <br> "name": "'
+        middleText = '", <br> "levels": [ <br>'
+        endText = '] <br> },'
+        middle = ""
+        for (i=0; levels.length > i; i++) {
+            middle = middle + '{ <br> "level": ' + levels[i] + ', <br> "link": "' + links[i] + '" <br> },'
+        }
+        document.getElementById("text").innerHTML = startText + Name.value + middleText + middle + endText
+    }
+
+    function addLevel() {
+        levels.push(document.getElementById("lname").value)
+        links.push(document.getElementById("llink").value)
+        runMain()
+    }
+</script>

@@ -1,53 +1,71 @@
 // Initialize an array to store the plans (can be preloaded here)
 let plans = [
-    {
-      "name": "Unranked",
-      "weeks": [
-        {
-          "name": "Week 1",
-          "workouts": [
-            {
-              "name": "Workout A",
-              "exercises": [
-                {
-                  "name": "Exercise A",
-                  "sets": "2",
-                  "reps": "3",
-                  "distance": "10m",
-                  "restTime": "30s",
-                  "youtubeLink": "x"
-                },
-                {
-                  "name": "Exercise B",
-                  "sets": "2",
-                  "reps": "3",
-                  "distance": "10m",
-                  "restTime": "30s",
-                  "youtubeLink": "x"
-                },
-                {
-                  "name": "Exercise C",
-                  "sets": "2",
-                  "reps": "3",
-                  "distance": "10m",
-                  "restTime": "30s",
-                  "youtubeLink": "x"
-                },
-                {
-                  "name": "Exercise D",
-                  "sets": "2",
-                  "reps": "3",
-                  "distance": "10m",
-                  "restTime": "30s",
-                  "youtubeLink": "x"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-  ];
+  {
+    "name": "Unranked",
+    "weeks": [
+      {
+        "name": "Week 1",
+        "workouts": [
+          {
+            "name": "Workout A",
+            "exercises": [
+              {
+                "name": "Exercise A",
+                "sets": "2",
+                "reps": "3",
+                "distance": "10m",
+                "time": "10 sec",
+                "restTime": "30s",
+                "youtubeLink": "x"
+              },
+              {
+                "name": "Exercise B",
+                "sets": "2",
+                "reps": "3",
+                "distance": "10m",
+                "time": "10 sec",
+                "restTime": "30s",
+                "youtubeLink": "x"
+              },
+              {
+                "name": "Exercise C",
+                "sets": "2",
+                "reps": "3",
+                "distance": "10m",
+                "time": "10 sec",
+                "restTime": "30s",
+                "youtubeLink": "x"
+              },
+              {
+                "name": "Exercise D",
+                "sets": "2",
+                "reps": "3",
+                "distance": "10m",
+                "time": "10 sec",
+                "restTime": "30s",
+                "youtubeLink": "x"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+];
+
+let exercises = [
+  {
+    "name": "Exercise A",
+    "levels": [
+      {
+        "level": 1,
+        "link": "youtube.com"
+      }
+    ]
+
+  },
+]
+
 
 // Preload data if available
 function preloadPlans() {
@@ -94,6 +112,7 @@ function renderPlans() {
           <input type="number" placeholder="Sets" id="sets${planIndex}${weekIndex}${workoutIndex}">
           <input type="number" placeholder="Reps" id="reps${planIndex}${weekIndex}${workoutIndex}">
           <input type="text" placeholder="Distance" id="distance${planIndex}${weekIndex}${workoutIndex}">
+          <input type="text" placeholder="Time" id="time${planIndex}${weekIndex}${workoutIndex}">
           <input type="text" placeholder="Rest Time" id="restTime${planIndex}${weekIndex}${workoutIndex}">
           <input type="text" placeholder="YouTube Link" id="youtubeLink${planIndex}${weekIndex}${workoutIndex}">
           <button onclick="addExercise(${planIndex}, ${weekIndex}, ${workoutIndex})">Add Exercise</button>
@@ -109,6 +128,7 @@ function renderPlans() {
             <p>Sets: ${exercise.sets}</p>
             <p>Reps: ${exercise.reps}</p>
             <p>Distance: ${exercise.distance || '-'}</p>
+            <p>Time: ${exercise.time}</p>
             <p>Rest Time: ${exercise.restTime}</p>
             <a href="${exercise.youtubeLink}" target="_blank">Watch Exercise</a>
           `;
@@ -168,6 +188,7 @@ function addExercise(planIndex, weekIndex, workoutIndex) {
   const sets = document.getElementById(`sets${planIndex}${weekIndex}${workoutIndex}`).value;
   const reps = document.getElementById(`reps${planIndex}${weekIndex}${workoutIndex}`).value;
   const distance = document.getElementById(`distance${planIndex}${weekIndex}${workoutIndex}`).value;
+  const time = document.getElementById(`time${planIndex}${weekIndex}${workoutIndex}`).value;
   const restTime = document.getElementById(`restTime${planIndex}${weekIndex}${workoutIndex}`).value;
   const youtubeLink = document.getElementById(`youtubeLink${planIndex}${weekIndex}${workoutIndex}`).value;
 
@@ -177,6 +198,7 @@ function addExercise(planIndex, weekIndex, workoutIndex) {
       sets: sets || '-',
       reps: reps || '-',
       distance: distance || '-',
+      time: time || '-',
       restTime: restTime || '-',
       youtubeLink: youtubeLink || '#'
     });
@@ -203,7 +225,7 @@ function exportPlansAsJS() {
     .replace(/"([^"]+)":/g, '$1:')   // Remove quotes around keys
     .replace(/"/g, "'");              // Change quotes to single quotes for JS object notation
   const jsCode = `let plans = ${dataStr};`;
-  
+
   const pre = document.createElement('pre');
   pre.textContent = jsCode;
   document.body.appendChild(pre);

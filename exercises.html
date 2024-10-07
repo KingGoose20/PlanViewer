@@ -47,6 +47,7 @@
                         <th>Sets</th>
                         <th>Reps</th>
                         <th>Distance</th>
+                        <th>Time</th>
                         <th>Rest Time</th>
                         <th>YouTube Link</th>
                     </tr>
@@ -98,6 +99,11 @@
                     const distanceCell = document.createElement('td');
                     distanceCell.innerHTML = exercise.distance;
                     exerciseRow.appendChild(distanceCell);
+
+                    // Create a cell for the time
+                    const timeCell = document.createElement('td');
+                    timeCell.innerHTML = exercise.time;
+                    exerciseRow.appendChild(timeCell);
 
                     // Create a cell for the rest time
                     const restTimeCell = document.createElement('td');
