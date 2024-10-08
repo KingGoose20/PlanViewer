@@ -16,7 +16,7 @@ let plans = [
                 "distance": "10m",
                 "time": "10 sec",
                 "restTime": "30s",
-                "youtubeLink": "x"
+                "levels" : []
               },
               {
                 "name": "Exercise B",
@@ -25,7 +25,7 @@ let plans = [
                 "distance": "10m",
                 "time": "10 sec",
                 "restTime": "30s",
-                "youtubeLink": "x"
+                "levels" : []
               },
               {
                 "name": "Exercise C",
@@ -34,7 +34,7 @@ let plans = [
                 "distance": "10m",
                 "time": "10 sec",
                 "restTime": "30s",
-                "youtubeLink": "x"
+                "levels" : []
               },
               {
                 "name": "Exercise D",
@@ -43,7 +43,7 @@ let plans = [
                 "distance": "10m",
                 "time": "10 sec",
                 "restTime": "30s",
-                "youtubeLink": "x"
+                "levels" : []
               }
             ]
           }
@@ -53,9 +53,59 @@ let plans = [
   },
 ];
 
+function addExercises() {
+  for (i=0; i< plans.length; i++) {
+    for (x=0; x<plans[i].weeks.length; x++) {
+      for (y=0; y<plans[i].weeks[x].workouts.length; y++) {
+        for (z=0; z<plans[i].weeks[x].workouts[y].exercises.length; z++) {
+          for (a=0; a<exercises.length; a++) {
+            if (exercises[a].name == plans[i].weeks[x].workouts[y].exercises[z].name) {
+              plans[i].weeks[x].workouts[y].exercises[z].levels = exercises[a].levels
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 let exercises = [
   {
     "name": "Exercise A",
+    "levels": [
+      {
+        "level": 1,
+        "link": "youtube.com"
+      },
+      {
+        "level": 2,
+        "link": "youtube.com"
+      }
+    ]
+
+  },
+  {
+    "name": "Exercise B",
+    "levels": [
+      {
+        "level": 1,
+        "link": "youtube.com"
+      }
+    ]
+
+  },
+  {
+    "name": "Exercise C",
+    "levels": [
+      {
+        "level": 1,
+        "link": "youtube.com"
+      }
+    ]
+
+  },
+  {
+    "name": "Exercise D",
     "levels": [
       {
         "level": 1,
@@ -66,6 +116,7 @@ let exercises = [
   },
 ]
 
+addExercises()
 
 // Preload data if available
 function preloadPlans() {
@@ -114,7 +165,7 @@ function renderPlans() {
           <input type="text" placeholder="Distance" id="distance${planIndex}${weekIndex}${workoutIndex}">
           <input type="text" placeholder="Time" id="time${planIndex}${weekIndex}${workoutIndex}">
           <input type="text" placeholder="Rest Time" id="restTime${planIndex}${weekIndex}${workoutIndex}">
-          <input type="text" placeholder="YouTube Link" id="youtubeLink${planIndex}${weekIndex}${workoutIndex}">
+          <input type="text" placeholder="YouTube Link" id="link${planIndex}${weekIndex}${workoutIndex}">
           <button onclick="addExercise(${planIndex}, ${weekIndex}, ${workoutIndex})">Add Exercise</button>
           <div id="exercisesContainer${planIndex}${weekIndex}${workoutIndex}"></div>
         `;
@@ -130,7 +181,7 @@ function renderPlans() {
             <p>Distance: ${exercise.distance || '-'}</p>
             <p>Time: ${exercise.time}</p>
             <p>Rest Time: ${exercise.restTime}</p>
-            <a href="${exercise.youtubeLink}" target="_blank">Watch Exercise</a>
+            <a href="${exercise.levels[0].link}" target="_blank">Watch Exercise</a>
           `;
 
           workoutDiv.querySelector(`#exercisesContainer${planIndex}${weekIndex}${workoutIndex}`).appendChild(exerciseDiv);
@@ -190,7 +241,7 @@ function addExercise(planIndex, weekIndex, workoutIndex) {
   const distance = document.getElementById(`distance${planIndex}${weekIndex}${workoutIndex}`).value;
   const time = document.getElementById(`time${planIndex}${weekIndex}${workoutIndex}`).value;
   const restTime = document.getElementById(`restTime${planIndex}${weekIndex}${workoutIndex}`).value;
-  const youtubeLink = document.getElementById(`youtubeLink${planIndex}${weekIndex}${workoutIndex}`).value;
+  const link = document.getElementById(`link${planIndex}${weekIndex}${workoutIndex}`).value;
 
   if (exerciseName.trim()) {
     plans[planIndex].weeks[weekIndex].workouts[workoutIndex].exercises.push({
@@ -200,7 +251,7 @@ function addExercise(planIndex, weekIndex, workoutIndex) {
       distance: distance || '-',
       time: time || '-',
       restTime: restTime || '-',
-      youtubeLink: youtubeLink || '#'
+      link: link || '#'
     });
     renderPlans();
   }

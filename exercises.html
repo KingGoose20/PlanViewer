@@ -83,6 +83,9 @@
                     // Create a cell for the exercise name
                     const exerciseNameCell = document.createElement('td');
                     exerciseNameCell.innerHTML = exercise.name;
+                    if (exercise.levels.length > 1) {
+                        exerciseNameCell.innerHTML = exercise.name + " | LVL " + exercise.levels[0].level
+                    }
                     exerciseRow.appendChild(exerciseNameCell);
 
                     // Create a cell for the sets
@@ -112,11 +115,11 @@
 
                     // Create a cell for the YouTube link
                     const youtubeCell = document.createElement('td');
-                    const youtubeLink = document.createElement('a');
-                    youtubeLink.href = exercise.youtubeLink;
-                    youtubeLink.target = "_blank"; // Open in new tab
-                    youtubeLink.innerText = "Video";
-                    youtubeCell.appendChild(youtubeLink);
+                    const link = document.createElement('a');
+                    link.href = exercise.levels[0].link;
+                    link.target = "_blank"; // Open in new tab
+                    link.innerText = "Video";
+                    youtubeCell.appendChild(link);
                     exerciseRow.appendChild(youtubeCell);
 
                     // Append the row to the exercises table
