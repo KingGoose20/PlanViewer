@@ -49,7 +49,7 @@
                         <th>Distance</th>
                         <th>Time</th>
                         <th>Rest Time</th>
-                        <th>YouTube Link</th>
+                        <th>Video Link</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,44 +83,55 @@
                     // Create a cell for the exercise name
                     const exerciseNameCell = document.createElement('td');
                     exerciseNameCell.innerHTML = exercise.name;
+                    exerciseNameCell.id = "name" + exercise.name
                     if (exercise.levels.length > 1) {
                         exerciseNameCell.innerHTML = exercise.name + " | LVL " + exercise.levels[0].level
                     }
+                    exerciseNameCell.style.border = '1px solid black';
                     exerciseRow.appendChild(exerciseNameCell);
 
                     // Create a cell for the sets
                     const setsCell = document.createElement('td');
                     setsCell.innerHTML = exercise.sets;
+                    setsCell.style.border = '1px solid black';
                     exerciseRow.appendChild(setsCell);
 
                     // Create a cell for the reps
                     const repsCell = document.createElement('td');
                     repsCell.innerHTML = exercise.reps;
+                    repsCell.style.border = '1px solid black';
                     exerciseRow.appendChild(repsCell);
 
                     // Create a cell for the distance
                     const distanceCell = document.createElement('td');
                     distanceCell.innerHTML = exercise.distance;
+                    distanceCell.style.border = '1px solid black';
                     exerciseRow.appendChild(distanceCell);
 
                     // Create a cell for the time
                     const timeCell = document.createElement('td');
                     timeCell.innerHTML = exercise.time;
+                    timeCell.style.border = '1px solid black';
                     exerciseRow.appendChild(timeCell);
 
                     // Create a cell for the rest time
                     const restTimeCell = document.createElement('td');
                     restTimeCell.innerHTML = exercise.restTime;
+                    restTimeCell.style.border = '1px solid black';
                     exerciseRow.appendChild(restTimeCell);
 
                     // Create a cell for the YouTube link
-                    const youtubeCell = document.createElement('td');
+                    const linkCell = document.createElement('td');
                     const link = document.createElement('a');
                     link.href = exercise.levels[0].link;
+                    link.id = "link" + exercise.name
                     link.target = "_blank"; // Open in new tab
                     link.innerText = "Video";
-                    youtubeCell.appendChild(link);
-                    exerciseRow.appendChild(youtubeCell);
+                    linkCell.style.border = '1px solid black';
+                    linkCell.appendChild(link);
+                    exerciseRow.appendChild(linkCell);
+
+                    exerciseRow.onclick = function () { switchLevels(exercise); };
 
                     // Append the row to the exercises table
                     const exercisesTable = document.getElementById('exercisesTable'); // Ensure you have a table with this ID in your HTML
@@ -131,8 +142,27 @@
 
             // Call renderExercises to load data
             renderExercises();
+
+            function switchLevels(what) {
+                for (i = 0; i < what.levels.length; i++) {
+                    if (i == what.levels.length - 1) {
+                        document.getElementById("name" + what.name).innerHTML = what.name + " | LVL " + what.levels[0].level
+                        document.getElementById("link" + what.name).href = what.levels[0].link
+                        break;
+                    } else {
+                        if (document.getElementById("link" + what.name).href == what.levels[i].link) {
+                            document.getElementById("name" + what.name).innerHTML = what.name + " | LVL " + what.levels[i + 1].level
+                            document.getElementById("link" + what.name).href = what.levels[i + 1].link
+                            break;
+                        } else {
+
+                        }
+                    }
+                }
+            }
         </script>
     </div>
+    
 </body>
 
 </html>

@@ -75,11 +75,11 @@ let exercises = [
     "levels": [
       {
         "level": 1,
-        "link": "youtube.com"
+        "link": "https://www.youtube.com/"
       },
       {
         "level": 2,
-        "link": "youtube.com"
+        "link": "https://www.youtube2.com/"
       }
     ]
 
@@ -89,7 +89,7 @@ let exercises = [
     "levels": [
       {
         "level": 1,
-        "link": "youtube.com"
+        "link": "https://www.youtube.com/"
       }
     ]
 
@@ -99,7 +99,7 @@ let exercises = [
     "levels": [
       {
         "level": 1,
-        "link": "youtube.com"
+        "link": "https://www.youtube.com/"
       }
     ]
 
@@ -109,7 +109,7 @@ let exercises = [
     "levels": [
       {
         "level": 1,
-        "link": "youtube.com"
+        "link": "https://www.youtube.com/"
       }
     ]
 

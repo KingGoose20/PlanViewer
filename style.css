@@ -27,8 +27,15 @@ table {
     width: 100%;
     table-layout: auto; /* Optional: controls how table behaves if it overflows */
     white-space: nowrap; /* Prevents text from wrapping, which could cause the table to grow */
+    border-collapse: collapse;
+    border: 2px solid black !important;
 }
 
-tr {
-    border: 1px solid black;
+tr:nth-child(even) {
+    background-color: #8a8a8a; /* Light grey color for even rows */
+  }
+
+td {
+    padding: 12px 0px; /* Remove padding to eliminate extra space inside cells */
+    border: 1px solid black; /* Add border to visualize cell boundaries */
 }
