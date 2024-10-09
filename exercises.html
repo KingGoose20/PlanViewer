@@ -40,16 +40,16 @@
                     id="woname"></span></u></h1>
         <div id="exercisesContainer"></div>
         <div class="table-container">
-            <table id="exercisesTable" style="width: 100%; text-align: left; border: 2px solid black;">
+            <table id="exercisesTable" style="width: 100%; text-align: left; border: 2px solid black; min-width: 700px;">
                 <thead>
                     <tr style="border: 1px solid black;">
-                        <th>Exercise Name</th>
-                        <th>Sets</th>
-                        <th>Reps</th>
-                        <th>Distance</th>
-                        <th>Time</th>
-                        <th>Rest Time</th>
-                        <th>Video Link</th>
+                        <th style="width: 24%;">Exercise Name</th>
+                        <th style="width: 12%;">Sets</th>
+                        <th style="width: 12%;">Reps</th>
+                        <th style="width: 12%;">Distance</th>
+                        <th style="width: 12%;">Time</th>
+                        <th style="width: 12%;">Rest Time</th>
+                        <th style="width: 16%;">Video Link</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -126,7 +126,10 @@
                     link.href = exercise.levels[0].link;
                     link.id = "link" + exercise.name
                     link.target = "_blank"; // Open in new tab
-                    link.innerText = "Video";
+                    link.innerHTML = "Video";
+                    if (exercise.levels.length > 1) {
+                        link.innerHTML = "Video" + " | LVL " + exercise.levels[0].level
+                    }
                     linkCell.style.border = '1px solid black';
                     linkCell.appendChild(link);
                     exerciseRow.appendChild(linkCell);
@@ -148,11 +151,13 @@
                     if (i == what.levels.length - 1) {
                         document.getElementById("name" + what.name).innerHTML = what.name + " | LVL " + what.levels[0].level
                         document.getElementById("link" + what.name).href = what.levels[0].link
+                        document.getElementById("link" + what.name).innerHTML = "Video" + " | LVL " + what.levels[0].level
                         break;
                     } else {
                         if (document.getElementById("link" + what.name).href == what.levels[i].link) {
                             document.getElementById("name" + what.name).innerHTML = what.name + " | LVL " + what.levels[i + 1].level
                             document.getElementById("link" + what.name).href = what.levels[i + 1].link
+                            document.getElementById("link" + what.name).innerHTML = "Video" + " | LVL " + what.levels[i+1].level
                             break;
                         } else {
 
