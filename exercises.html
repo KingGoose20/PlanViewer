@@ -36,8 +36,8 @@
             }
         </script>
         <button onclick="openWebPage()">Back</button>
-        <h1>Exercises in Plan <u><span id="pname"></span></u> and <u><span id="wname"></span></u> and <u><span
-                    id="woname"></span></u></h1>
+        <h1>Exercises in Plan <u><span id="pname" style="color: rgb(32, 0, 255)"></span></u> and <u><span id="wname" style="color: rgb(32, 0, 255)"></span></u> and <u><span
+                    id="woname" style="color: rgb(32, 0, 255)"></span></u></h1>
         <div id="exercisesContainer"></div>
         <div class="table-container">
             <table id="exercisesTable"
@@ -135,12 +135,13 @@
                     linkCell.appendChild(link);
                     exerciseRow.appendChild(linkCell);
 
-                    exerciseRow.onclick = function () { switchLevels(exercise); };
 
-                    for (let i = 0; i < Math.min(exerciseRow.cells.length, 4); i++) {
-                        exerciseRow.cells[i].onclick = function () {
-                            switchLevels(exercise);
-                        };
+                    for (let i = 0; i < Math.min(exerciseRow.cells.length, 2); i++) {
+                        if (exercise.levels.length > 1) {
+                            exerciseRow.cells[i].onclick = function () {
+                                switchLevels(exercise);
+                            };
+                        }
                     }
 
                     // Append the row to the exercises table
@@ -174,7 +175,7 @@
             }
         </script>
     </div>
-
+    <p style="padding: 10px;"><i>Click on <b>exercise name</b> to change level.</i></p>
 </body>
 
 </html>
