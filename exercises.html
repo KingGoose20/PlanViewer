@@ -40,7 +40,8 @@
                     id="woname"></span></u></h1>
         <div id="exercisesContainer"></div>
         <div class="table-container">
-            <table id="exercisesTable" style="width: 100%; text-align: left; border: 2px solid black; min-width: 700px;">
+            <table id="exercisesTable"
+                style="width: 100%; text-align: left; border: 2px solid black; min-width: 700px;">
                 <thead>
                     <tr style="border: 1px solid black;">
                         <th style="width: 24%;">Exercise Name</th>
@@ -136,6 +137,12 @@
 
                     exerciseRow.onclick = function () { switchLevels(exercise); };
 
+                    for (let i = 0; i < Math.min(exerciseRow.cells.length, 4); i++) {
+                        exerciseRow.cells[i].onclick = function () {
+                            switchLevels(exercise);
+                        };
+                    }
+
                     // Append the row to the exercises table
                     const exercisesTable = document.getElementById('exercisesTable'); // Ensure you have a table with this ID in your HTML
                     exercisesTable.appendChild(exerciseRow);
@@ -157,7 +164,7 @@
                         if (document.getElementById("link" + what.name).href == what.levels[i].link) {
                             document.getElementById("name" + what.name).innerHTML = what.name + " | LVL " + what.levels[i + 1].level
                             document.getElementById("link" + what.name).href = what.levels[i + 1].link
-                            document.getElementById("link" + what.name).innerHTML = "Video" + " | LVL " + what.levels[i+1].level
+                            document.getElementById("link" + what.name).innerHTML = "Video" + " | LVL " + what.levels[i + 1].level
                             break;
                         } else {
 
@@ -167,7 +174,7 @@
             }
         </script>
     </div>
-    
+
 </body>
 
 </html>
