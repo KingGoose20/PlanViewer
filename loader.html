@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full-Screen Conditional Page Loader</title>
+    <style>
+        /* Reset margin and padding to make the iframe cover the whole screen */
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Style for the full-screen iframe */
+        #contentFrame {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            /* Remove border for a clean look */
+        }
+
+        /* Optional: button styling */
+        #loadButton {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            z-index: 10;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Full-screen iframe for loading content -->
+    <iframe id="contentFrame"></iframe>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const planIndex = urlParams.get('planIndex');
+        const weekIndex = urlParams.get('weekIndex');
+        const workoutIndex = urlParams.get('workoutIndex');
+
+        folderName = ""
+        baseName = ""
+
+        switch (parseInt(planIndex)) {
+            case 0:
+                folderName = "UNRANKED EARLY OFF SEASON"
+                baseName = "UNRANKED_ Early Off-Season _ PJF Performance"
+                break;
+            case 1:
+                folderName = "UNRANKED LATE OFF SEASON"
+                baseName = "UNRANKED_ Late Off-Season _ PJF Performance"
+                break;
+            case 2:
+                folderName = "UNRANKED PRE SEASON"
+                baseName = "UNRANKED_ Pre-Season _ PJF Performance"
+                break;
+            case 3:
+                folderName = "UNRANKED IN SEASON"
+                baseName = "UNRANKED_ In-Season _ PJF Performance"
+                break;
+            case 4:
+                folderName = "Skill Code"
+                baseName = "Skill Code _ PJF Performance"
+                break;
+            case 5:
+                folderName = "Handle Snacks"
+                baseName = "Handle Snacks _ PJF Performance"
+                break;
+            case 6:
+                folderName = "Twitch"
+                baseName = "The Twitch Code _ PJF Performance"
+                break;
+            case 7:
+                folderName = "Basketball Athleticism Code"
+                baseName = "Basketball Athleticism Code _ PJF Performance"
+                break;
+            case 8:
+                folderName = "Basketball Strength Code"
+                baseName = "Basketball Strength Code _ PJF Performance"
+                break;
+            case 9:
+                folderName = "Hoop IQ"
+                baseName = "Hoop IQ Vault _ PJF Performance"
+                break;
+            case 10:
+                folderName = "Lifestyle"
+                baseName = "Lifestyle Development _ PJF Performance"
+                break;
+            case 11:
+                folderName = "Mindset"
+                baseName = "Mindset Development _ PJF Performance"
+                break;
+        }
+
+        let iframe = document.getElementById('contentFrame');
+        iframe.src = folderName + "/" + baseName + "_W" + (parseInt(weekIndex) + 1) + "_D" + (parseInt(workoutIndex)) + ".htm";
+
+        function changeWeek() {
+            console.log("abc")
+        }
+    </script>
+</body>
+
+</html>

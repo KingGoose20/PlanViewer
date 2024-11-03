@@ -37,7 +37,8 @@
             }
         </script>
         <button onclick="openWebPage()">Back</button>
-        <h1>Workouts in Plan <u><span id="pname" style="color: rgb(32, 0, 255)"></span></u> and <u><span id="wname" style="color: rgb(32, 0, 255)"></span></u></h1>
+        <h1>Workouts in <u><span id="pname" style="color: rgb(32, 0, 255)"></span></u> and <u><span id="wname"
+                    style="color: rgb(32, 0, 255)"></span></u></h1>
         <div id="workoutsContainer"></div>
 
         <script src="script.js"></script> <!-- Include your plans data -->
@@ -51,19 +52,31 @@
                 const workoutsContainer = document.getElementById('workoutsContainer');
                 workoutsContainer.innerHTML = ''; // Clear the container
 
-                const workouts = plans[planIndex].weeks[weekIndex].workouts; // Get workouts in the selected week
-
-                workouts.forEach((workout, index) => {
+                const workouts = newPlans[planIndex].days; // Get workouts in the selected week
+                document.getElementById("pname").innerHTML = newPlans[planIndex].name
+                document.getElementById("wname").innerHTML = "Week " + (parseInt(weekIndex)+1)
+                for (i = 0; i < workouts; i++) {
                     const workoutDiv = document.createElement('div');
                     workoutDiv.classList.add('workout');
-                    workoutDiv.innerText = workout.name;
-                    document.getElementById("pname").innerHTML = plans[planIndex].name
-                    document.getElementById("wname").innerHTML = plans[planIndex].weeks[weekIndex].name
+                    workoutDiv.innerText = "Day " + (i + 1);
+                    const x=i+1
                     workoutDiv.onclick = () => {
-                        window.location.href = `exercises.html?planIndex=${planIndex}&weekIndex=${weekIndex}&workoutIndex=${index}`; // Redirect to exercises page
+                        window.open(`loader.html?planIndex=${planIndex}&weekIndex=` + weekIndex + `&workoutIndex=` + x, "_blank") // Redirect to workouts page
                     };
                     workoutsContainer.appendChild(workoutDiv);
-                });
+                }
+                /*
+                                workouts.forEach((workout, index) => {
+                                    const workoutDiv = document.createElement('div');
+                                    workoutDiv.classList.add('workout');
+                                    workoutDiv.innerText = workout.name;
+                                    document.getElementById("pname").innerHTML = plans[planIndex].name
+                                    document.getElementById("wname").innerHTML = plans[planIndex].weeks[weekIndex].name
+                                    workoutDiv.onclick = () => {
+                                        window.location.href = `exercises.html?planIndex=${planIndex}&weekIndex=${weekIndex}&workoutIndex=${index}`; // Redirect to exercises page
+                                    };
+                                    workoutsContainer.appendChild(workoutDiv);
+                                });*/
             }
 
             // Call renderWorkouts to load data

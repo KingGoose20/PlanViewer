@@ -50,18 +50,18 @@
                 const weeksContainer = document.getElementById('weeksContainer');
                 weeksContainer.innerHTML = ''; // Clear the container
 
-                const weeks = plans[planIndex].weeks; // Get all weeks in the selected plan
-
-                weeks.forEach((week, index) => {
+                const weeks = newPlans[planIndex].weeks; // Get all weeks in the selected plan
+                for (i = 0; i < weeks; i++) {
                     const weekDiv = document.createElement('div');
                     weekDiv.classList.add('week');
-                    weekDiv.innerText = week.name;
-                    document.getElementById("name").innerHTML = plans[planIndex].name
+                    weekDiv.innerText = "Week " + (i+1);
+                    document.getElementById("name").innerHTML = newPlans[planIndex].name
+                    const x = i
                     weekDiv.onclick = () => {
-                        window.location.href = `workouts.html?planIndex=${planIndex}&weekIndex=${index}`; // Redirect to workouts page
+                        window.open(`loader.html?planIndex=${planIndex}&weekIndex=` + x + `&workoutIndex=1`, "_blank") // Redirect to workouts page
                     };
                     weeksContainer.appendChild(weekDiv);
-                });
+                }
             }
 
             // Call renderWeeks to load data

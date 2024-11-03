@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel to JS Converter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+<body>
+    <h1>Excel to JavaScript Converter</h1>
+    <input type="file" id="upload" />
+    <button id="convert">Convert to JS Format</button>
+    <pre id="output"></pre>
+
+    <script>
+        document.getElementById('convert').onclick = function () {
+            const fileInput = document.getElementById('upload');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please upload a file.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array' });
+
+                // Assume the first sheet is the one we need
+                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                const json = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+
+                // Convert to desired JS format
+                const plans = convertToPlans(json);
+                document.getElementById('output').textContent = JSON.stringify(plans, null, 2);
+            };
+
+            reader.readAsArrayBuffer(file);
+        };
+
+        function convertToPlans(data) {
+            const plans = [];
+            let currentWeek = {};
+            let currentDay = {};
+
+            // Iterate through each row in the data
+            for (let i = 0; i < data.length; i++) {
+                const row = data[i];
+
+                // Detect week and day
+                if (row[0].startsWith('Week')) {
+                    if (currentWeek.week) {
+                        plans.push(currentWeek);
+                    }
+                    currentWeek = { week: row[0], days: [] };
+                } else if (row[0].startsWith('Day')) {
+                    if (currentDay.day) {
+                        currentWeek.days.push(currentDay);
+                    }
+                    currentDay = { day: row[0], workouts: [] };
+                } else if (row[0] !== 'Exercise' && row[0] !== '' && currentDay) {
+                    currentDay.workouts.push({
+                        name: row[0],
+                        sets: row[1] || '',
+                        reps: row[2] || '',
+                        time: row[3] || '',
+                        distance: row[4] || '',
+                        restTime: row[5] || '',
+                        youtubeLink: row[6] || ''
+                    });
+                }
+            }
+
+            // Push last day and week
+            if (currentDay.day) {
+                currentWeek.days.push(currentDay);
+            }
+            if (currentWeek.week) {
+                plans.push(currentWeek);
+            }
+
+            return plans;
+        }
+    </script>
+</body>
+</html>

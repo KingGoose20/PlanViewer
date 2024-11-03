@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weeks</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+
+        }
+
+        .week {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+        }
+    </style>
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <h3 class="banner" style="text-align: center;">Plan Viewer</h3>
+    <div class="main">
+        <script>
+            function openWebPage() {
+                // Get the current URL parameters
+                const params = new URLSearchParams(window.location.search);
+
+                // Construct the new URL with the parameters
+                const newUrl = 'index.html?' + params.toString(); // Change this to your target URL
+
+                // Open the new URL in a new tab
+                window.open(newUrl, '_self');
+            }
+        </script>
+        <button onclick="openWebPage()">Back</button>
+        <h1>All Weeks in Plan <u><span id="name" style="color: rgb(32, 0, 255)"></span></u></h1>
+        <div id="weeksContainer"></div>
+
+        <script src="script.js"></script> <!-- Include your plans data -->
+        <script>
+            // Retrieve the plan index from the URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const planIndex = urlParams.get('planIndex');
+
+            function renderWeeks() {
+                const weeksContainer = document.getElementById('weeksContainer');
+                weeksContainer.innerHTML = ''; // Clear the container
+
+                const weeks = plans[planIndex].weeks; // Get all weeks in the selected plan
+
+                weeks.forEach((week, index) => {
+                    const weekDiv = document.createElement('div');
+                    weekDiv.classList.add('week');
+                    weekDiv.innerText = week.name;
+                    document.getElementById("name").innerHTML = plans[planIndex].name
+                    weekDiv.onclick = () => {
+                        window.location.href = `workouts.html?planIndex=${planIndex}&weekIndex=${index}`; // Redirect to workouts page
+                    };
+                    weeksContainer.appendChild(weekDiv);
+                });
+            }
+
+            // Call renderWeeks to load data
+            renderWeeks();
+        </script>
+    </div>
+</body>
+
+</html>

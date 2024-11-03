@@ -1,4 +1,4 @@
-// Initialize an array to store the plans (can be preloaded here)
+// Initialize an array to store the newPlans (can be preloaded here)
 let plans = [
   {
     "name": "Unranked",
@@ -53,14 +53,77 @@ let plans = [
   },
 ];
 
+let newPlans = [
+  {
+    "name" : "Unranked: Early Off Season",
+    "weeks" : 12,
+    "days" : 6
+  },
+  {
+    "name" : "Unranked: Late Off Season",
+    "weeks" : 12,
+    "days" : 6
+  },
+  {
+    "name" : "Unranked: Pre Season",
+    "weeks" : 12,
+    "days" : 6
+  },
+  {
+    "name" : "Unranked: In Season",
+    "weeks" : 16,
+    "days" : 6
+  },
+  {
+    "name" : "Skill Code",
+    "weeks" : 12,
+    "days" : 5
+  },
+  {
+    "name" : "Handle Snacks",
+    "weeks" : 16,
+    "days" : 6
+  },
+  {
+    "name" : "The Twitch Code",
+    "weeks" : 16,
+    "days" : 3
+  },
+  {
+    "name" : "Basketball Athleticism Code",
+    "weeks" : 12,
+    "days" : 6
+  },
+  {
+    "name" : "Basketball Strength Code",
+    "weeks" : 52,
+    "days" : 6
+  },
+  {
+    "name" : "HOOP IQ Vault",
+    "weeks" : 2,
+    "days" : 7
+  },
+  {
+    "name" : "Lifestyle Development",
+    "weeks" : 1,
+    "days" : 3
+  },
+  {
+    "name" : "Mindset Development",
+    "weeks" : 4,
+    "days" : 3
+  },
+]
+
 function addExercises() {
-  for (i=0; i< plans.length; i++) {
-    for (x=0; x<plans[i].weeks.length; x++) {
-      for (y=0; y<plans[i].weeks[x].workouts.length; y++) {
-        for (z=0; z<plans[i].weeks[x].workouts[y].exercises.length; z++) {
+  for (i=0; i< newPlans.length; i++) {
+    for (x=0; x<newPlans[i].weeks.length; x++) {
+      for (y=0; y<newPlans[i].weeks[x].workouts.length; y++) {
+        for (z=0; z<newPlans[i].weeks[x].workouts[y].exercises.length; z++) {
           for (a=0; a<exercises.length; a++) {
-            if (exercises[a].name == plans[i].weeks[x].workouts[y].exercises[z].name) {
-              plans[i].weeks[x].workouts[y].exercises[z].levels = exercises[a].levels
+            if (exercises[a].name == newPlans[i].weeks[x].workouts[y].exercises[z].name) {
+              newPlans[i].weeks[x].workouts[y].exercises[z].levels = exercises[a].levels
             }
           }
         }
@@ -121,18 +184,18 @@ addExercises()
 // Preload data if available
 function preloadPlans() {
   // If there’s preloaded data, set it here. Example:
-  // plans = [ { name: "Preloaded Plan", weeks: [...] }, ... ];
+  // newPlans = [ { name: "Preloaded Plan", weeks: [...] }, ... ];
 
   // Render the preloaded data
-  renderPlans();
+  /*renderPlans();*/
 }
 
-// Function to render all plans
-function renderPlans() {
+// Function to render all newPlans
+/*function renderPlans() {
   const plansContainer = document.getElementById('plansContainer');
   plansContainer.innerHTML = '';  // Clear the container
 
-  plans.forEach((plan, planIndex) => {
+  newPlans.forEach((plan, planIndex) => {
     const planDiv = document.createElement('div');
     planDiv.classList.add('plan');
     planDiv.innerHTML = `
@@ -141,7 +204,7 @@ function renderPlans() {
       <button onclick="addWeek(${planIndex})">Add Week</button>
       <div id="weeksContainer${planIndex}"></div>
     `;
-
+  
     // Render weeks for this plan
     plan.weeks.forEach((week, weekIndex) => {
       const weekDiv = document.createElement('div');
@@ -152,7 +215,7 @@ function renderPlans() {
         <button onclick="addWorkout(${planIndex}, ${weekIndex})">Add Workout</button>
         <div id="workoutsContainer${planIndex}${weekIndex}"></div>
       `;
-
+      
       // Render workouts for this week
       week.workouts.forEach((workout, workoutIndex) => {
         const workoutDiv = document.createElement('div');
@@ -192,16 +255,15 @@ function renderPlans() {
 
       planDiv.querySelector(`#weeksContainer${planIndex}`).appendChild(weekDiv);
     });
-
     plansContainer.appendChild(planDiv);
   });
 }
-
+*/
 // Function to add a new plan
 function addPlan() {
   const planName = document.getElementById('planName').value;
   if (planName.trim()) {
-    plans.push({
+    newPlans.push({
       name: planName,
       weeks: []
     });
@@ -213,7 +275,7 @@ function addPlan() {
 function addWeek(planIndex) {
   const weekName = document.getElementById(`weekName${planIndex}`).value;
   if (weekName.trim()) {
-    plans[planIndex].weeks.push({
+    newPlans[planIndex].weeks.push({
       name: weekName,
       workouts: []
     });
@@ -225,7 +287,7 @@ function addWeek(planIndex) {
 function addWorkout(planIndex, weekIndex) {
   const workoutName = document.getElementById(`workoutName${planIndex}${weekIndex}`).value;
   if (workoutName.trim()) {
-    plans[planIndex].weeks[weekIndex].workouts.push({
+    newPlans[planIndex].weeks[weekIndex].workouts.push({
       name: workoutName,
       exercises: []
     });
@@ -244,7 +306,7 @@ function addExercise(planIndex, weekIndex, workoutIndex) {
   const link = document.getElementById(`link${planIndex}${weekIndex}${workoutIndex}`).value;
 
   if (exerciseName.trim()) {
-    plans[planIndex].weeks[weekIndex].workouts[workoutIndex].exercises.push({
+    newPlans[planIndex].weeks[weekIndex].workouts[workoutIndex].exercises.push({
       name: exerciseName,
       sets: sets || '-',
       reps: reps || '-',
@@ -257,9 +319,9 @@ function addExercise(planIndex, weekIndex, workoutIndex) {
   }
 }
 
-// Function to export the plans as JSON for saving
+// Function to export the newPlans as JSON for saving
 function exportPlans() {
-  const dataStr = JSON.stringify(plans, null, 2); // Pretty-print JSON with indentation
+  const dataStr = JSON.stringify(newPlans, null, 2); // Pretty-print JSON with indentation
   const blob = new Blob([dataStr], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -270,17 +332,17 @@ function exportPlans() {
   document.body.removeChild(a);
 }
 
-// Function to copy the plans as JavaScript array (so you can paste it directly into the script)
+// Function to copy the newPlans as JavaScript array (so you can paste it directly into the script)
 function exportPlansAsJS() {
-  const dataStr = JSON.stringify(plans, null, 2)
+  const dataStr = JSON.stringify(newPlans, null, 2)
     .replace(/"([^"]+)":/g, '$1:')   // Remove quotes around keys
     .replace(/"/g, "'");              // Change quotes to single quotes for JS object notation
-  const jsCode = `let plans = ${dataStr};`;
+  const jsCode = `let newPlans = ${dataStr};`;
 
   const pre = document.createElement('pre');
   pre.textContent = jsCode;
   document.body.appendChild(pre);
 }
 
-// Call this on page load to preload plans
+// Call this on page load to preload newPlans
 preloadPlans();

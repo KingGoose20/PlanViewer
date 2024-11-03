@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workout Plans</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .plan {
+      margin: 10px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+    }
+  </style>
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+  <h3 class="banner" style="text-align: center;">Plan Viewer</h3>
+  <div class="main">
+    <h1>All Available Workout Plans</h1>
+    <div id="plansContainer"></div>
+
+    <script src="script.js"></script> <!-- Include your plans data -->
+    <script>
+      function renderPlans() {
+        const plansContainer = document.getElementById('plansContainer');
+        plansContainer.innerHTML = ''; // Clear the container
+
+        plans.forEach((plan, index) => {
+          const planDiv = document.createElement('div');
+          planDiv.classList.add('plan');
+          planDiv.innerText = plan.name;
+          planDiv.onclick = () => {
+            window.location.href = `weeks.html?planIndex=${index}`; // Redirect to weeks page
+          };
+          plansContainer.appendChild(planDiv);
+        });
+      }
+
+      // Call renderPlans to load data
+      renderPlans();
+    </script>
+  </div>
+
+</body>
+
+</html>

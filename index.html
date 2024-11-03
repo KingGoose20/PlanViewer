@@ -32,7 +32,7 @@
         const plansContainer = document.getElementById('plansContainer');
         plansContainer.innerHTML = ''; // Clear the container
 
-        plans.forEach((plan, index) => {
+        newPlans.forEach((plan, index) => {
           const planDiv = document.createElement('div');
           planDiv.classList.add('plan');
           planDiv.innerText = plan.name;
