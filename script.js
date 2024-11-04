@@ -111,7 +111,7 @@ let newPlans = [
   },
   {
     "name" : "Mindset Development",
-    "weeks" : 4,
+    "weeks" : 1,
     "days" : 3
   },
 ]
