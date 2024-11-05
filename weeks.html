@@ -58,7 +58,7 @@
                     document.getElementById("name").innerHTML = newPlans[planIndex].name
                     const x = i
                     weekDiv.onclick = () => {
-                        window.open(`loader.html?planIndex=${planIndex}&weekIndex=` + x + `&workoutIndex=1`, "_self") // Redirect to workouts page
+                        window.open(`loader.html?planIndex=${planIndex}&weekIndex=` + x + `&workoutIndex=1`, "_blank") // Redirect to workouts page
                     };
                     weeksContainer.appendChild(weekDiv);
                 }

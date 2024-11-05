@@ -43,8 +43,15 @@
 <body>
 
     <!-- Full-screen iframe for loading content -->
-    <iframe id="contentFrame"></iframe>
+    <iframe id="contentFrame" sandbox="allow-scripts allow-same-origin">
 
+    </iframe>
+    <script>
+        function changeWeekStart() {
+            console.log("ABC")
+            return ("ABC")
+        }
+    </script>
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const planIndex = urlParams.get('planIndex');
@@ -106,10 +113,27 @@
         }
 
         let iframe = document.getElementById('contentFrame');
-        iframe.src = folderName + "/" + baseName + "_W" + (parseInt(weekIndex) + 1) + "_D" + (parseInt(workoutIndex)) + ".htm";
+        iframe.src = folderName + "/" + baseName + "_W" + (parseInt(weekIndex) + 1) + "_D1.htm";
+        document.title = baseName.slice(0, -17) + "Week " + (parseInt(weekIndex) + 1)
+        function changeWeeksStart() {
+            console.log("REACHED")
+        }
 
-        function changeWeek() {
-            console.log("abc")
+
+        function changeWeek(newweek) {
+            iframe = document.getElementById('contentFrame');
+            oldsrc = iframe.src
+            start = oldsrc.slice(0, -8)
+            // Create a new URL object based on the current window location
+            let url = new URL(window.location.href);
+
+            // Modify or set a parameter (e.g., change 'page' to '2')
+            url.searchParams.set('weekIndex', String(newweek - 1));
+
+            // Update the browser's URL without reloading the page
+            window.history.pushState({}, '', url);
+
+            document.getElementById('contentFrame').src = start + newweek + "_D1.htm";
         }
     </script>
 </body>
