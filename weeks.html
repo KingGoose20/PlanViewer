@@ -54,11 +54,11 @@
                 for (i = 0; i < weeks; i++) {
                     const weekDiv = document.createElement('div');
                     weekDiv.classList.add('week');
-                    weekDiv.innerText = "Week " + (i+1);
+                    weekDiv.innerText = "Week " + (i + 1);
                     document.getElementById("name").innerHTML = newPlans[planIndex].name
                     const x = i
                     weekDiv.onclick = () => {
-                        window.open(`loader.html?planIndex=${planIndex}&weekIndex=` + x + `&workoutIndex=1`, "_blank") // Redirect to workouts page
+                        window.open(createLink(x), "_self") // Redirect to workouts page
                     };
                     weeksContainer.appendChild(weekDiv);
                 }
@@ -66,6 +66,73 @@
 
             // Call renderWeeks to load data
             renderWeeks();
+        </script>
+        <script>
+            function createLink(week) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const planIndex = urlParams.get('planIndex');
+                const weekIndex = urlParams.get('weekIndex');
+                const workoutIndex = urlParams.get('workoutIndex');
+
+                folderName = ""
+                baseName = ""
+
+                switch (parseInt(planIndex)) {
+                    case 0:
+                        folderName = "UNRANKED EARLY OFF SEASON"
+                        baseName = "UNRANKED_ Early Off-Season _ PJF Performance"
+                        break;
+                    case 1:
+                        folderName = "UNRANKED LATE OFF SEASON"
+                        baseName = "UNRANKED_ Late Off-Season _ PJF Performance"
+                        break;
+                    case 2:
+                        folderName = "UNRANKED PRE SEASON"
+                        baseName = "UNRANKED_ Pre-Season _ PJF Performance"
+                        break;
+                    case 3:
+                        folderName = "UNRANKED IN SEASON"
+                        baseName = "UNRANKED_ In-Season _ PJF Performance"
+                        break;
+                    case 4:
+                        folderName = "Skill Code"
+                        baseName = "Skill Code _ PJF Performance"
+                        break;
+                    case 5:
+                        folderName = "Handle Snacks"
+                        baseName = "Handle Snacks _ PJF Performance"
+                        break;
+                    case 6:
+                        folderName = "Twitch"
+                        baseName = "The Twitch Code _ PJF Performance"
+                        break;
+                    case 7:
+                        folderName = "Basketball Athleticism Code"
+                        baseName = "Basketball Athleticism Code _ PJF Performance"
+                        break;
+                    case 8:
+                        folderName = "Basketball Strength Code"
+                        baseName = "Basketball Strength Code _ PJF Performance"
+                        break;
+                    case 9:
+                        folderName = "Hoop IQ"
+                        baseName = "Hoop IQ Vault _ PJF Performance"
+                        break;
+                    case 10:
+                        folderName = "Lifestyle"
+                        baseName = "Lifestyle Development _ PJF Performance"
+                        break;
+                    case 11:
+                        folderName = "Mindset"
+                        baseName = "Mindset Development _ PJF Performance"
+                        break;
+                }
+                params = "?planIndex=" + planIndex + "&weekIndex=" + (week+1)
+                const newLink = folderName + "/" + baseName + "_W" + (week+1) + "_D1.htm" + params;
+                return newLink
+            }
+
+
         </script>
     </div>
 </body>

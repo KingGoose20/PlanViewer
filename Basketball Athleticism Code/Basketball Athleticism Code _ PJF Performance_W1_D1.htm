@@ -625,7 +625,19 @@ div.dropzone { border: 2px dashed #006E3B; }
 
 <div class="row total-workout-plan ">
 
-    <a onclick="window.parent.location.href = '../index.html'"><i class="fa fa-chevron-left" aria-hidden="true"></i> Unranked Basketball Academy</a>
+      <script>
+    function redirectWithParams() {
+        // Get the current URL parameters
+        const currentParams = new URLSearchParams(window.location.search);
+  
+        // Define the base URL of the destination
+        const destinationURL = "../weeks.html";
+        console.log(currentParams)
+        // Redirect to the destination with current parameters
+        window.location.href = `${destinationURL}?${currentParams.toString()}`;
+    }
+  </script>
+    <a onclick="redirectWithParams()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Unranked Basketball Academy</a>
     <div class="row workout-plan-show">
       <div class="columns small-12  large-9 large-push-3"> 
           <div class="row show-for-medium-only">
