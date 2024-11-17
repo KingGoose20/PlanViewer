@@ -744,6 +744,38 @@ div.dropzone { border: 2px dashed #006E3B; }
                             <option>Week 11 of 12</option>
                             <option selected="selected">Week 12 of 12</option>
                       </select>
+<script>
+                        // Select the dropdown element
+                        const dropdown = document.getElementById("mainDropdown");
+
+                        // Add an event listener for the 'change' event
+                        dropdown.addEventListener("change", function () {
+                          // Get the selected value
+                          console.log("here")
+                          const selectedValue = dropdown.value;
+                          // Run your function with the selected value
+                          myFunction(selectedValue);
+                        });
+
+                        // Function to run on dropdown change
+                        function myFunction(selectedValue) {
+                          const currentUrl = window.location.href;
+                          const urlParams = new URLSearchParams(window.location.search);
+                          const planIndex = urlParams.get('planIndex');
+                          const weekIndex = urlParams.get('weekIndex');
+                          length = 28 + 2*(planIndex.toString().length + weekIndex.toString().length);
+                          start = currentUrl.slice(0, -length);
+                          newWeek = parseInt((selectedValue.slice(0, 7)).slice(5,10))
+                          console.log(newWeek)
+                          newvar = start + newWeek + "_D1.htm?planIndex=" + planIndex + "&weekIndex=" + newWeek
+                          console.log(newvar)
+                          console.log(currentUrl)
+                          console.log("Selected value:", selectedValue);
+                          window.open(newvar, "_self")
+                          // Additional logic can be added here
+                        }
+
+                      </script>
                     </div>
                 </div>
               <div class="columns small-4 medium-9 large-8">
