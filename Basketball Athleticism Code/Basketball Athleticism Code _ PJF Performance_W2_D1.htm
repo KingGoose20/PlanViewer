@@ -755,6 +755,7 @@ div.dropzone { border: 2px dashed #006E3B; }
                           const weekIndex = urlParams.get('weekIndex');
                           length = 28 + 2*(planIndex.toString().length + weekIndex.toString().length);
                           start = currentUrl.slice(0, -length);
+                          console.log(start)
                           newWeek = parseInt((selectedValue.slice(0, 7)).slice(5,10))
                           console.log(newWeek)
                           newvar = start + newWeek + "_D1.htm?planIndex=" + planIndex + "&weekIndex=" + newWeek

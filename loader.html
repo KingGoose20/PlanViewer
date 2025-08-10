@@ -110,8 +110,11 @@
                 folderName = "Mindset"
                 baseName = "Mindset Development _ PJF Performance"
                 break;
+            case 12:
+                folderName = "Durability Code"
+                baseName = "The Durability Code Prime _ PJF Performance"
+                break;
         }
-
         let iframe = document.getElementById('contentFrame');
         iframe.src = folderName + "/" + baseName + "_W" + (parseInt(weekIndex) + 1) + "_D1.htm";
         document.title = baseName.slice(0, -17) + "Week " + (parseInt(weekIndex) + 1)

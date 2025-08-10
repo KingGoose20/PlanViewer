@@ -114,6 +114,11 @@ let newPlans = [
     "weeks" : 1,
     "days" : 3
   },
+    {
+    "name" : "Durability Code",
+    "weeks" : 8,
+    "days" : 6
+  },
 ]
 
 function addExercises() {
