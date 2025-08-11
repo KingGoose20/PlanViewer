@@ -119,6 +119,11 @@ let newPlans = [
     "weeks" : 8,
     "days" : 6
   },
+  {
+    "name" : "Parents Plan",
+    "weeks" : 8,
+    "days" : 6
+  },
 ]
 
 function addExercises() {
